@@ -4,8 +4,8 @@ const solc = require('solc'); // pragma version of the solidity file has to be s
 async function compile(contract_name = 'StandardToken') {
   // Load the contract source code
   const source_code = fs.readFileSync(
-    process.cwd() + '/' + contract_name + '.sol',
-    'utf8'
+    process.cwd() + '/contracts/' + contract_name + '.sol',
+    'utf-8'
   );
 
   // object to be compiled
@@ -26,7 +26,10 @@ async function compile(contract_name = 'StandardToken') {
     2
   );
 
-  fs.writeFileSync(process.cwd() + '/' + contract_name + '.json', final);
+  fs.writeFileSync(
+    process.cwd() + '/contracts/' + contract_name + '.json',
+    final
+  );
 }
 
 compile('StandardToken');

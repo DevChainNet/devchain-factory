@@ -1,13 +1,11 @@
-// Dependency file: @openzeppelin/contracts/token/ERC20/IERC20.sol
+// ██████╗ ███████╗██╗   ██╗ ██████╗██╗  ██╗ █████╗ ██╗███╗   ██╗   ███╗   ██╗███████╗████████╗
+// ██╔══██╗██╔════╝██║   ██║██╔════╝██║  ██║██╔══██╗██║████╗  ██║   ████╗  ██║██╔════╝╚══██╔══╝
+// ██║  ██║█████╗  ██║   ██║██║     ███████║███████║██║██╔██╗ ██║   ██╔██╗ ██║█████╗     ██║   
+// ██║  ██║██╔══╝  ╚██╗ ██╔╝██║     ██╔══██║██╔══██║██║██║╚██╗██║   ██║╚██╗██║██╔══╝     ██║   
+// ██████╔╝███████╗ ╚████╔╝ ╚██████╗██║  ██║██║  ██║██║██║ ╚████║██╗██║ ╚████║███████╗   ██║   
+// ╚═════╝ ╚══════╝  ╚═══╝   ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝╚═╝╚═╝  ╚═══╝╚══════╝   ╚═╝
 
 // SPDX-License-Identifier: MIT
-// OpenZeppelin Contracts (last updated v4.9.0) (token/ERC20/IERC20.sol)
-
-// pragma solidity ^0.8.4;
-
-/**
-    @dev Interface of the ERC20 standard as defined in the EIP.
-*/
 
 interface IERC20 {
    
@@ -203,7 +201,7 @@ pragma solidity =0.8.4;
 contract StandardToken is IERC20, Ownable, BaseToken {
     using SafeMath for uint256;
 
-    uint256 public constant VERSION = 7;
+    uint256 public constant VERSION = 10;
 
     mapping(address => uint256) private _balances;
     mapping(address => mapping(address => uint256)) private _allowances;
@@ -301,6 +299,7 @@ contract StandardToken is IERC20, Ownable, BaseToken {
                 "ERC20: transfer amount exceeds allowance"
             )
         );
+
         return true;
     }
 
@@ -362,6 +361,7 @@ contract StandardToken is IERC20, Ownable, BaseToken {
 
         _totalSupply = _totalSupply.add(amount);
         _balances[account] = _balances[account].add(amount);
+
         emit Transfer(address(0), account, amount);
     }
 
@@ -374,7 +374,9 @@ contract StandardToken is IERC20, Ownable, BaseToken {
             amount,
             "ERC20: burn amount exceeds balance"
         );
+
         _totalSupply = _totalSupply.sub(amount);
+
         emit Transfer(account, address(0), amount);
     }
 
@@ -387,6 +389,7 @@ contract StandardToken is IERC20, Ownable, BaseToken {
         require(spender != address(0), "ERC20: approve to the zero address");
 
         _allowances[owner][spender] = amount;
+        
         emit Approval(owner, spender, amount);
     }
 
